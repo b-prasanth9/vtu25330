@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>VTU25330 — Verification</title>
+  <style>body{font-family:system-ui,Arial;margin:40px}a.button{display:inline-block;padding:8px 12px;margin:6px;background:#0366d6;color:#fff;text-decoration:none;border-radius:6px}</style>
+</head>
+<body>
+  <h1>VTU25330 — Quick Verification</h1>
+  <p>Use these links to view the sample outputs and repository files on GitHub.</p>
+
+  <h2>Sample JSON (raw)</h2>
+  <p>
+    <a class="button" href="https://raw.githubusercontent.com/b-prasanth9/vtu25330/main/sample_schedule_response.json" target="_blank">Sample schedule (raw)</a>
+    <a class="button" href="https://raw.githubusercontent.com/b-prasanth9/vtu25330/main/sample_notifications_response.json" target="_blank">Sample notifications (raw)</a>
+  </p>
+
+  <h2>Files on GitHub (view)</h2>
+  <p>
+    <a class="button" href="https://github.com/b-prasanth9/vtu25330/blob/main/HOWTO.md" target="_blank">HOWTO.md</a>
+    <a class="button" href="https://github.com/b-prasanth9/vtu25330/blob/main/notification_system_design.md" target="_blank">notification_system_design.md</a>
+    <a class="button" href="https://github.com/b-prasanth9/vtu25330/blob/main/postman_collection.json" target="_blank">postman_collection.json</a>
+  </p>
+
+  <h2>Run your services locally</h2>
+  <pre>cd vtu25330\vehicle_scheduling_be
+node index.js
+
+cd ..\campus_notifications
+node index.js</pre>
+
+  <p>Local endpoints:
+    <ul>
+      <li><a href="http://127.0.0.1:3001/schedule/1">/schedule/1</a></li>
+      <li><a href="http://127.0.0.1:3002/notifications?limit=5">/notifications?limit=5</a></li>
+    </ul>
+  </p>
+
+  <p>Raw JSON links can be used for automated verification.</p>
+</body>
+</html>
