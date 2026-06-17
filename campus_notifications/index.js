@@ -29,7 +29,8 @@ class NotificationScheduler {
     this.notifications = Array.isArray(notifications) ? notifications : [];
   }
 
-  getPrioritySorted() {
+  getPrioritySorted(limit = 10) {
+    const sanitizedLimit = Number.isFinite(Number(limit)) && Number(limit) > 0 ? Number(limit) : 10;
     return this.notifications
       .slice()
       .sort((a, b) => {
@@ -37,7 +38,7 @@ class NotificationScheduler {
         if (priorityDiff !== 0) return priorityDiff;
         return new Date(b.Timestamp) - new Date(a.Timestamp);
       })
-      .slice(0, 10);
+      .slice(0, sanitizedLimit);
   }
 }
 
