@@ -1,0 +1,79 @@
+{
+  "info": {
+    "name": "VTU25330 - Tester Collection",
+    "_postman_id": "vtu25330-collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth - Get Token",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{AUTH_EMAIL}}\",\n  \"name\": \"{{AUTH_NAME}}\",\n  \"rollNo\": \"vtu25330\",\n  \"accessCode\": \"{{ACCESS_CODE}}\",\n  \"clientID\": \"{{CLIENT_ID}}\",\n  \"clientSecret\": \"{{CLIENT_SECRET}}\"\n}"
+        },
+        "url": {
+          "raw": "https://4.224.186.213/evaluation-service/auth",
+          "protocol": "https",
+          "host": ["4.224.186.213"],
+          "path": ["evaluation-service","auth"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const body = pm.response.json();",
+              "const token = body.accessToken || body.token || body.access_token || body.data?.accessToken;",
+              "if(token) pm.environment.set('ACCESS_TOKEN', token);",
+              "pm.test('Got token', () => pm.expect(token).to.not.be.undefined);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Get Depots (remote, auth)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{ACCESS_TOKEN}}" }
+        ],
+        "url": {
+          "raw": "https://4.224.186.213/evaluation-service/depots",
+          "protocol": "https",
+          "host": ["4.224.186.213"],
+          "path": ["evaluation-service","depots"]
+        }
+      }
+    },
+    {
+      "name": "Local - Vehicle Scheduler",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{LOCAL_SCHEDULER}}/schedule/1",
+          "host": ["{{LOCAL_SCHEDULER}}"],
+          "path": ["schedule","1"]
+        }
+      }
+    },
+    {
+      "name": "Local - Notifications (limit)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{LOCAL_NOTIFICATIONS}}/notifications?limit=5",
+          "host": ["{{LOCAL_NOTIFICATIONS}}"],
+          "path": ["notifications"],
+          "query": [ { "key": "limit", "value": "5" } ]
+        }
+      }
+    }
+  ]
+}
